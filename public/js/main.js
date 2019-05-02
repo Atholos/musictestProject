@@ -90,7 +90,6 @@ const sendUpdate = (evt) => {
   });
 };
 
-
 updatefrm.addEventListener('submit', sendUpdate);
 
 // *********************************
@@ -192,12 +191,14 @@ const updateView = (items) => {
     // call createArticle to add html content to article
     article.innerHTML = createArticle(item.Thumbnail, item.Title, [
       '<small>' + time.format('dddd, MMMM Do YYYY, HH:mm') + '</small>',
-      item.details], item.FileID);
+      item.Description], item.FileID);
+    console.log(originalData);
     article.querySelector('.view').addEventListener('click', () => {
       // open modal and populate
       document.querySelector('.modal').classList.remove('hidden');
       document.querySelector('.modal img').src = item.Image;
       document.querySelector('.modal h4').innerHTML = item.Title;
+
       // populate map
       resetMap(item);
       // fix map resizing issue
