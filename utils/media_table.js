@@ -50,7 +50,7 @@ const userLogin = (connection, res) => {
 const update = (data, connection, res) => {
   // simple query
   connection.execute(
-      'UPDATE Uploadable SET category = ?, title = ?, details = ? WHERE FileID = ? AND userID = ?;',
+      'UPDATE Uploadable SET Description = ?, Title = ?, WHERE FileID = ? AND UserID = ?;',
       data,
       (err, results, fields) => {
         // console.log(results); // results contains rows returned by server
@@ -67,7 +67,7 @@ const update = (data, connection, res) => {
 const del = (data, connection, res) => {
   // simple query
   connection.execute(
-      'DELETE FROM Uploadable WHERE FileID = ? AND userID = ?;', // can delete only current user's images
+      'DELETE FROM Uploadable WHERE FileID = ? AND UserID = ?;', // can delete only current user's images
       data,
       (err, results, fields) => {
         console.log(results); // results contains rows returned by server

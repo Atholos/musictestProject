@@ -57,10 +57,8 @@ const fillUpdate = (image) => {
   updatefrm.scrollIntoView();
   document.querySelector('#updateform input[name=FileID]').value = image.FileID;
   document.querySelector(
-      '#updateform input[name=Description]').value = image.description;
-  document.querySelector('#updateform input[name=Title]').value = image.title;
-  document.querySelector(
-      '#updateform textarea[name=Details]').value = image.details;
+      '#updateform input[name=Description]').value = image.Description;
+  document.querySelector('#updateform input[name=Title]').value = image.Title;
   document.querySelector('#updateform button').removeAttribute('disabled');
 };
 
@@ -70,7 +68,6 @@ const sendUpdate = (evt) => {
   const data = JSON.stringify([
     updatefrm.querySelector('input[name="Description"]').value,
     updatefrm.querySelector('input[name="Title"]').value,
-    updatefrm.querySelector('textarea[name="Details"]').value,
     updatefrm.querySelector('input[name="FileID"]').value,
   ]);
   const settings = {
@@ -92,6 +89,7 @@ const sendUpdate = (evt) => {
     getData();
   });
 };
+
 
 updatefrm.addEventListener('submit', sendUpdate);
 
@@ -192,14 +190,14 @@ const updateView = (items) => {
     const article = document.createElement('article');
     const time = moment(item.time);
     // call createArticle to add html content to article
-    article.innerHTML = createArticle(item.thumbnail, item.title, [
+    article.innerHTML = createArticle(item.Thumbnail, item.Title, [
       '<small>' + time.format('dddd, MMMM Do YYYY, HH:mm') + '</small>',
       item.details], item.FileID);
     article.querySelector('.view').addEventListener('click', () => {
       // open modal and populate
       document.querySelector('.modal').classList.remove('hidden');
-      document.querySelector('.modal img').src = item.image;
-      document.querySelector('.modal h4').innerHTML = item.title;
+      document.querySelector('.modal img').src = item.Image;
+      document.querySelector('.modal h4').innerHTML = item.Title;
       // populate map
       resetMap(item);
       // fix map resizing issue

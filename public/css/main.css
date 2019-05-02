@@ -287,7 +287,7 @@ h1{
     color: white;
 }
 h3 {
-    color: white;
+    color: black;
 }
 
 .header button{
@@ -392,7 +392,60 @@ li {
     }
 }
 
+.main{
+    margin-top: 10%;
+}
 
 
 
 
+.popup-form{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+.popup-form h1{
+    color: black;
+    padding: 5px;
+}
+
+.form-container{
+    max-width: 300px;
+    background-color: ghostwhite;
+    padding: 10px;
+    border-radius: 25px;
+    border: gray 2px solid;
+    text-align: center;
+}
+.form-container input[type=text],
+.form-container input[type=password],
+.form-container input[type=email]{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: auto;
+    background-color: lightgray;
+}
+.container-button{
+    cursor: pointer;
+    width: 100%;
+    color: white;
+    padding: 15px 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    background-color: green;
+    border: none;
+    opacity: 0.8;
+}
+#cancelBtn{
+    background-color: darkred;
+}
+#cancelLoginBtn{
+    background-color: darkred;
+}
+.container-button:hover, #cancelBtn:hover, #cancelLoginBtn:hover{
+    opacity: 1;
+}
