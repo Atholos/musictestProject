@@ -1,0 +1,26 @@
+CREATE TABLE `Users` (
+  `UserID` int(20) NOT NULL AUTO_INCREMENT,
+  `Username` text NOT NULL,
+  `Email` text NOT NULL,
+  `Password` text NOT NULL,
+  `Admin` text NOT NULL,
+  PRIMARY KEY (UserID)
+);
+CREATE TABLE `Category` (
+`ID` int(20) NOT NULL AUTO_INCREMENT,
+`Instrument` text NOT NULL,
+    PRIMARY KEY (ID)
+);
+CREATE TABLE `Uploadable` (
+  `FileID` int(20) NOT NULL,
+`Title` text NOT NULL,
+`Description` text NOT NULL,
+`Thumbnail` text NOT NULL,
+`Date` DATE NOT NULL,
+`Image` text NOT NULL,
+`Original` text NOT NULL,
+`UserID` int(20) NOT NULL,
+`ID` int(20) NOT NULL,
+FOREIGN KEY (UserID) REFERENCES Users(UserID),
+FOREIGN KEY (ID) REFERENCES Category(ID)
+);

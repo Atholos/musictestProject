@@ -1,0 +1,140 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="modules/leaflet/dist/leaflet.css"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body id="formHere">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<div class="header">
+    <a id="home" onclick="showPics()" style="float: left;"><img src="CSS/images/homebutton2_1.png"></a>
+<!-- SIGN UP -->
+    <button id="SignUp" class="openform-button" onclick="openRegisterForm()">Sign up!</button>
+    <button id="login" class="openform-button" onclick="openLoginForm()">Login!</button>
+    <!-- LOGIN FORM AND BUTTON -->
+
+    <div class="popup-form" id="register-form">
+        <form class="form-container" id="registeration">
+            <h1>Register</h1>
+            <label><b>Username</b></label>
+            <input type ="text" placeholder="Enter Username" id="username" required>
+
+            <label><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" id="email" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="password" required>
+
+            <label><b>Confirm password</b></label>
+            <input type="password" placeholder="Enter Password" id = "confpwd" required>
+
+            <button type="submit" class="container-button">Register</button>
+            <button type="button" class="container-button" id="cancelBtn" onclick="closeRegisterForm()">Close</button>
+        </form>
+    </div>
+
+
+    <div class = "popup-form" id ="login-form">
+        <form class="form-container">
+            <h1>Sign In</h1>
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" id="login-name" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="login-password">
+
+            <button type="submit" class="container-button">Login</button>
+            <button type="button" class="container-button" id ="cancelLoginBtn" onclick="closeLoginForm()">Close</button>
+        </form>
+    </div>
+
+    <a id = "profile" onclick="profileHTML()"><img src="css/images/profilepic.png"></a>
+
+</div>
+<div id="main">
+<main id="uploads">
+<ul>
+
+</ul>
+</main>
+
+    <div class="form-container">
+        <h3>Add image</h3>
+    <form action="/upload" method="post" enctype="multipart/form-data" id="mediaform">
+        <input type="text" name="Description" placeholder="Description">
+        <input type="text" name="Title" placeholder="Title">
+        <input type="text" name="Image" placeholder="Image">
+        <input type="file" name="my-image" accept="image/*">
+        <label class="button">Select image</label>
+        <button type="submit">Upload</button>
+    </form>
+    </div>
+
+
+    <div class="form-container">
+        <h3>Update image</h3>
+        <form action="/update" id="updateform">
+            <input type="text" name="Description" placeholder="Description">
+            <input type="text" name="Title" placeholder="Title">
+            <input type="text" name="Image" placeholder="Image">
+            <textarea name="Details" placeholder="Details"></textarea>
+            <input type="hidden" name="FileID">
+            <button type="submit">Save</button>
+        </form>
+    </div>
+    <nav class="row">
+        <div id="categories">
+
+        </div>
+        <div>
+            <button id="reset-button">Reset</button>
+        </div>
+    </nav>
+    <main>
+        <div id="content">
+            <ul>
+
+            </ul>
+        </div>
+    </main>
+</div>
+
+<div class="modal hidden">
+    <button>&times;</button>
+    <h4>Map</h4>
+
+    <figure>
+        <img src="" alt="">
+        <div id="map" class="small-map"></div>
+    </figure>
+</div>
+<!-- /.modal -->
+
+<script src="modules/moment/moment.js"></script>
+<script src="modules/leaflet/dist/leaflet.js"></script>
+<script src="js/main.js"></script>
+<script src="js/signup_form.js"></script>
+<script src =js/signup_validation.js></script>
+<script src="js/content.js"></script>
+
+
+
+
+
+</body>
+</html>

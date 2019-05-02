@@ -1,0 +1,91 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+namespace Ilkkamtk
+{
+    #region Bc_media
+    public class Bc_media
+    {
+        #region Member Variables
+        protected int _mID;
+        protected unknown _time;
+        protected string _category;
+        protected string _title;
+        protected string _details;
+        protected string _coordinates;
+        protected string _thumbnail;
+        protected string _image;
+        protected string _original;
+        protected int _userID;
+        #endregion
+        #region Constructors
+        public Bc_media() { }
+        public Bc_media(unknown time, string category, string title, string details, string coordinates, string thumbnail, string image, string original, int userID)
+        {
+            this._time=time;
+            this._category=category;
+            this._title=title;
+            this._details=details;
+            this._coordinates=coordinates;
+            this._thumbnail=thumbnail;
+            this._image=image;
+            this._original=original;
+            this._userID=userID;
+        }
+        #endregion
+        #region Public Properties
+        public virtual int MID
+        {
+            get {return _mID;}
+            set {_mID=value;}
+        }
+        public virtual unknown Time
+        {
+            get {return _time;}
+            set {_time=value;}
+        }
+        public virtual string Category
+        {
+            get {return _category;}
+            set {_category=value;}
+        }
+        public virtual string Title
+        {
+            get {return _title;}
+            set {_title=value;}
+        }
+        public virtual string Details
+        {
+            get {return _details;}
+            set {_details=value;}
+        }
+        public virtual string Coordinates
+        {
+            get {return _coordinates;}
+            set {_coordinates=value;}
+        }
+        public virtual string Thumbnail
+        {
+            get {return _thumbnail;}
+            set {_thumbnail=value;}
+        }
+        public virtual string Image
+        {
+            get {return _image;}
+            set {_image=value;}
+        }
+        public virtual string Original
+        {
+            get {return _original;}
+            set {_original=value;}
+        }
+        public virtual int UserID
+        {
+            get {return _userID;}
+            set {_userID=value;}
+        }
+        #endregion
+    }
+    #endregion
+}
