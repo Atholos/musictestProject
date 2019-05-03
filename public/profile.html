@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" type="text/css" href="CSS/main.css">
+</head>
+
+<body id="formHere">
+
+
+<!--The navbar on the page -->
+
+<div class="header">
+    <!--Frontpage link-->
+    <a id="home" href="index.html" style="float: left;"><img src="CSS/images/homebutton2_1.png"></a>
+
+    <!--Signup Form -->
+    <button id="SignUp" class="openform-button" onclick="openRegisterForm()">Sign up!</button>
+
+    <!--Login Form -->
+    <button id="login" class="openform-button" onclick="openLoginForm()">Login!</button>
+
+    <!--Profilepage link -->
+    <a id = "profile" href="profile.html"><img src="css/images/profilepic.png"></a>
+
+</div>
+
+<div class="main">
+    <main id="uploads">
+        <ul>
+
+        </ul>
+    </main>
+
+    <div class="form-container">
+        <h3>Add image</h3>
+        <form action="/upload" method="post" enctype="multipart/form-data" id="mediaform">
+            <input type="text" name="Description" placeholder="Description">
+            <input type="text" name="Title" placeholder="Title">
+            <input type="file" name="my-image" accept="image/*">
+            <label class="button">Select image</label>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <div class="popup-form" id="register-form">
+        <form class="form-container" id="registration">
+            <h1>Register</h1>
+            <label><b>Username</b></label>
+            <input type ="text" placeholder="Enter Username" id="username" name ="username" required>
+
+            <label><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" id="email" name="email" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="password" name="password" required>
+
+            <label><b>Confirm password</b></label>
+            <input type="password" placeholder="Enter Password" id = "confpwd" required>
+
+            <button type="submit" class="container-button">Register</button>
+            <button type="button" class="container-button" id="cancelBtn" onclick="closeRegisterForm()">Close</button>
+        </form>
+    </div>
+
+
+    <div class = "popup-form" id ="login-form">
+        <form class="form-container">
+            <h1>Sign In</h1>
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" id="login-name" name="username" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="login-password" name="password" required>
+
+            <button type="submit" class="container-button">Login</button>
+            <button type="button" class="container-button" id ="cancelLoginBtn" onclick="closeLoginForm()">Close</button>
+        </form>
+    </div>
+
+    <div class="form-container">
+        <h3>Update image</h3>
+        <form action="/update" id="updateform">
+            <input type="text" name="Title" placeholder="Title">
+            <textarea name="Details" placeholder="Details"></textarea>
+            <input type="hidden" name="FileID">
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <nav class="row">
+        <div id="categories">
+
+        </div>
+        <div>
+            <button id="reset-button">Reset</button>
+        </div>
+    </nav>
+    <main>
+        <div id="content">
+            <ul>
+
+            </ul>
+        </div>
+    </main>
+
+    <div class="modal hidden">
+        <button>&times;</button>
+        <h4>Map</h4>
+
+        <figure>
+            <img src="" alt="">
+            <div id="map" class="small-map"></div>
+        </figure>
+    </div><!-- /.modal -->
+</div>
+
+</body>
+<script src="modules/moment/moment.js"></script>
+<script src="modules/leaflet/dist/leaflet.js"></script>
+<script src="js/main.js"></script>
+<script src="js/content.js"></script>
+
+
+</html>

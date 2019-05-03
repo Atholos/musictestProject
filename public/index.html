@@ -1,60 +1,40 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!-- Place favicon.ico in the root directory -->
-    <link rel="stylesheet" href="modules/leaflet/dist/leaflet.css"/>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" type="text/css" href="CSS/main.css">
 </head>
-<div>
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
 
-<!-- Add your site or application content here -->
+<body id="formHere">
+
+
+<!--The navbar on the page -->
+
 <div class="header">
-    <a href="index.html" style="float: left"><img src="CSS/images/homebutton2_1.png" alt="homeBtn"></a>
-<!-- SIGN UP -->
-    <button id="SignUp" class="openform-button" onclick="openForm()">Sign up</button>
+    <!--Frontpage link-->
+    <a id="home" href="index.html" style="float: left;"><img src="CSS/images/homebutton2_1.png"></a>
 
-    <!-- LOGIN FORM AND BUTTON -->
+    <!--Signup Form -->
+    <button id="SignUp" class="openform-button" onclick="openRegisterForm()">Sign up!</button>
 
-    <form id="loginForm" action="/login">
-        <div class="loginRow">
-            <label for="Username">Username:</label>
-            <input type="text" size="10" id="Username" name="Username">
-        </div>
-        <div class="loginRow">
-            <label for="Password">Password:</label>
-            <input type="password" size="10" id="Password" name="Password">
-        </div>
+    <!--Login Form -->
+    <button id="login" class="openform-button" onclick="openLoginForm()">Login!</button>
 
-        <button id ="login" class="login-button" type="submit">Login</button>
-    </form>
-
-
-
-    <a href="Profile.html"><img src="CSS/images/profilepic.png" alt="profileBtn"></a>
+    <!--Profilepage link -->
+    <a id = "profile" href="profile.html"><img src="css/images/profilepic.png"></a>
 
 </div>
 
-<main id="uploads">
-<ul>
-
-</ul>
-</main>
 <div class="main">
-    <div class="form-container">
-        <h3>Add image</h3>
+<main id="uploads">
+    <ul>
+
+    </ul>
+</main>
+
+<div class="form-container">
+    <h3>Add image</h3>
     <form action="/upload" method="post" enctype="multipart/form-data" id="mediaform">
         <input type="text" name="Description" placeholder="Description">
         <input type="text" name="Title" placeholder="Title">
@@ -62,35 +42,69 @@
         <label class="button">Select image</label>
         <button type="submit">Upload</button>
     </form>
-    </div>
-
-
-    <div class="form-container">
-        <h3>Update image</h3>
-        <form action="/update" id="updateform">
-            <input type="text" name="Title" placeholder="Title">
-            <textarea name="Details" placeholder="Details"></textarea>
-            <input type="hidden" name="FileID">
-            <button type="submit">Save</button>
-        </form>
-    </div>
-    <nav class="row">
-        <div id="categories">
-
-        </div>
-        <div>
-            <button id="reset-button">Reset</button>
-        </div>
-    </nav>
-    <main>
-        <div id="content">
-            <ul>
-
-            </ul>
-        </div>
-    </main>
 </div>
+
+<div class="popup-form" id="register-form">
+    <form class="form-container" id="registration">
+        <h1>Register</h1>
+        <label><b>Username</b></label>
+        <input type ="text" placeholder="Enter Username" id="username" name ="username" required>
+
+        <label><b>Email</b></label>
+        <input type="email" placeholder="Enter Email" id="email" name="email" required>
+
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="password" name="password" required>
+
+        <label><b>Confirm password</b></label>
+        <input type="password" placeholder="Enter Password" id = "confpwd" required>
+
+        <button type="submit" class="container-button">Register</button>
+        <button type="button" class="container-button" id="cancelBtn" onclick="closeRegisterForm()">Close</button>
+    </form>
 </div>
+
+
+<div class = "popup-form" id ="login-form">
+    <form class="form-container">
+        <h1>Sign In</h1>
+        <label><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" id="login-name" name="username" required>
+
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="login-password" name="password" required>
+
+        <button type="submit" class="container-button">Login</button>
+        <button type="button" class="container-button" id ="cancelLoginBtn" onclick="closeLoginForm()">Close</button>
+    </form>
+</div>
+
+<div class="form-container">
+    <h3>Update image</h3>
+    <form action="/update" id="updateform">
+        <input type="text" name="Title" placeholder="Title">
+        <textarea name="Details" placeholder="Details"></textarea>
+        <input type="hidden" name="FileID">
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+<nav class="row">
+    <div id="categories">
+
+    </div>
+    <div>
+        <button id="reset-button">Reset</button>
+    </div>
+</nav>
+<main>
+    <div id="content">
+        <ul>
+
+        </ul>
+    </div>
+</main>
+
 <div class="modal hidden">
     <button>&times;</button>
     <h4>Map</h4>
@@ -100,14 +114,13 @@
         <div id="map" class="small-map"></div>
     </figure>
 </div><!-- /.modal -->
+</div>
 
+</body>
 <script src="modules/moment/moment.js"></script>
 <script src="modules/leaflet/dist/leaflet.js"></script>
 <script src="js/main.js"></script>
 <script src="js/content.js"></script>
-<script src="js/signup_form.js"></script>
-<script src="js/signup_validation.js"></script>
-<script src="js/login_validation.js"></script>
 
-</body>
+
 </html>

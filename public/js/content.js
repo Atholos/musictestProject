@@ -16,6 +16,7 @@ const showPics= () => {
 
 
 const profileHTML = () =>{
+  console.log('I was pressed: '+main);
   while (main.firstChild) {
     main.removeChild(main.firstChild);
   }

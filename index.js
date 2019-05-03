@@ -1,21 +1,32 @@
 const express = require('express');
 require('dotenv').config();
-const db = require('./utils/database');
 const mediaTable = require('./utils/media_table');
 const multer = require('multer');
-const resize = require('./utils/resize');
-const exif = require('./utils/exif');
+const db = require('./utils/database');
 const bodyParser = require('body-parser');
+const pass = require('./utils/pass');
+const session = require('express-session');
+const passport = require('passport');
+const exif = require('./utils/exif');
+const resize = require('./utils/resize');
 
 const app = express();
 
-// tiedostojen tallennuskansio
 const upload = multer({dest: 'public/uploads/'});
 
-// parse application/x-www-form-urlencoded
+app.use(session({
+  secret: 'keyboard LOL cat',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {secure: false},
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.use(bodyParser.urlencoded({extended: true}));
 
-// parse application/json
 app.use(bodyParser.json());
 
 // tietokantayhteys
@@ -30,16 +41,18 @@ app.get('/all', (req, res) => {
   // res.send(200);
 });
 
+
+
 app.post('/image', upload.single('my-image'), (req, res, next) => {
   // req body comes now from multer
   next();
-  /*
   const response = {
   message: 'File uploaded',
   file: req.file,
   };
   res.send(response);
-  */
+  console.log(response)
+
 });
 
 app.use('/image', (req, res, next) => {
@@ -76,15 +89,6 @@ app.use('/image', (req, res, next) => {
   ];
   mediaTable.insert(data, connection, res);
 });
-// käyttäjälogin, loginform
-app.use('/login', (req, res, next) => {
-  const data = [
-    req.body.Username,
-    req.body.Password,
-  ];
-  mediaTable.userLogin(data, connection, res);
-});
-
 // update image
 app.patch('/update', (req, res) => {
   // req body comes now from body-parser
@@ -96,6 +100,7 @@ app.patch('/update', (req, res) => {
   mediaTable.update(req.body, connection, res);
 });
 
+
 // delete image
 app.delete('/del/:FileID', (req, res) => {
   const data = [
@@ -104,5 +109,12 @@ app.delete('/del/:FileID', (req, res) => {
   ];
   mediaTable.del(data, connection, res);
 });
+
+
+// authentication with custom callback (http://www.passportjs.org/docs/authenticate/)
+app.post('/login', pass.login);
+
+// register new user, automatically login
+app.post('/register', pass.register, pass.login);
 
 app.listen(3000);

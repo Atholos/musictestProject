@@ -1,3 +1,4 @@
+
 /*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
 
 /*
@@ -260,7 +261,7 @@ p {
     color: white;
 }
 
-div.header{
+.header{
     background-color: white;
     padding: 1% 1%;
     overflow: auto;
@@ -268,7 +269,9 @@ div.header{
     position:fixed;
     top: 0; /* lock menubar to top of page */
     width: 100%;
+    margin-left: 0;
 }
+
 div.loginRow {
     float: left;
 
@@ -386,66 +389,16 @@ li {
 .container-button:hover, #cancelBtn:hover{
     opacity: 1;
 }
+#cancelLoginBtn{
+    background-color: darkred;
+}
 @media only screen and (max-width: 768px) {
     .header button {
     <!-- placeholder -->
     }
 }
 
+
 .main{
     margin-top: 10%;
-}
-
-
-
-
-.popup-form{
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
-}
-.popup-form h1{
-    color: black;
-    padding: 5px;
-}
-
-.form-container{
-    max-width: 300px;
-    background-color: ghostwhite;
-    padding: 10px;
-    border-radius: 25px;
-    border: gray 2px solid;
-    text-align: center;
-}
-.form-container input[type=text],
-.form-container input[type=password],
-.form-container input[type=email]{
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin: auto;
-    background-color: lightgray;
-}
-.container-button{
-    cursor: pointer;
-    width: 100%;
-    color: white;
-    padding: 15px 20px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    background-color: green;
-    border: none;
-    opacity: 0.8;
-}
-#cancelBtn{
-    background-color: darkred;
-}
-#cancelLoginBtn{
-    background-color: darkred;
-}
-.container-button:hover, #cancelBtn:hover, #cancelLoginBtn:hover{
-    opacity: 1;
 }

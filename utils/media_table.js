@@ -1,11 +1,13 @@
 'use strict';
+const db = require('./database');
+
 const select = (connection, res) => {
   // simple query
-  connection.query(
+  db.connect().query(
       'SELECT * FROM Uploadable',
       (err, results, fields) => {
         // console.log(results); // results contains rows returned by server
-        // console.log(fields); // fields contains extra meta data about results, if available
+        console.log(fields); // fields contains extra meta data about results, if available
         if (err == null) {
           res.send(results);
         } else {
@@ -17,7 +19,7 @@ const select = (connection, res) => {
 
 const insert = (data, connection, res) => {
   // simple query
-  connection.execute(
+  db.connect().execute(
       'INSERT INTO Uploadable (FileID, Description, Title, Thumbnail, Image, Original, UserID, ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?);',
       data,
       (err, results, fields) => {
@@ -32,24 +34,10 @@ const insert = (data, connection, res) => {
       },
   );
 };
-const userLogin = (connection, res) => {
-  connection.query(
-      'SELECT UserID, Password FROM Users;',
-      (err, results, fields) => {
-        console.log(fields);
-        console.log(results);
-        if (err == null) {
-          res.send(results);
-        } else {
-          console.log(err);
-        }
-      },
-  );
-};
 
 const update = (data, connection, res) => {
   // simple query
-  connection.execute(
+  db.connect().execute(
       'UPDATE Uploadable SET Description = ?, Title = ?, WHERE FileID = ? AND UserID = ?;',
       data,
       (err, results, fields) => {
@@ -81,10 +69,42 @@ const del = (data, connection, res) => {
   );
 };
 
+const login = (data, callback) => {
+  console.log(data)
+  // simple query
+  db.connect().execute(
+      'SELECT * FROM Users WHERE Username = ?;',
+      data,
+      (err, results, fields) => {
+        console.log('results', results); // results contains rows returned by server
+        // console.log(fields); // fields contains extra meta data about results, if available
+        console.log(err);
+        callback(results);
+      },
+  );
+};
+
+const register = (data, next) => {
+  // simple query
+  //console.log(data)
+  //TODO Check if user and email are available
+  db.connect().execute(
+      'INSERT INTO Users (UserID,Username,Email,Password,Admin) VALUES (default,?,?,?,default);',
+      data,
+      (err, results, fields) => {
+        console.log(results); // results contains rows returned by server
+        // console.log(fields); // fields contains extra meta data about results, if available
+        console.log(err);
+        next();
+      },
+  );
+};
+
 module.exports = {
   select: select,
   insert: insert,
   update: update,
   del: del,
-  userLogin: userLogin
+  login: login,
+  register: register,
 };

@@ -1,29 +1,4 @@
 'use strict';
-// login button
-// select loginform
-const loginfrm = document.querySelector('#loginForm');
-
-// send data from loginform to database
-const logUser = (evt) => {
-  evt.preventDefault();
-  const ld = new FormData(loginfrm);
-  const sendInfo = {
-    method: 'post',
-    body: ld,
-  };
-  console.log(sendInfo);
-  fetch('./login', sendInfo)
-  .then((response) => {
-    return response.json();
-  }).then((json) => {
-    console.log('login');
-    console.log(json);
-    // reset list
-    ld.reset();
-  });
-};
-
-loginfrm.addEventListener('submit', logUser);
 
 // upload image ********************
 const frm = document.querySelector('#mediaform');
@@ -35,7 +10,6 @@ const sendForm = (evt) => {
     method: 'post',
     body: fd,
   };
-
   fetch('./image', settings).then((response) => {
     return response.json();
   }).then((json) => {
@@ -92,8 +66,6 @@ const sendUpdate = (evt) => {
 
 updatefrm.addEventListener('submit', sendUpdate);
 
-// *********************************
-
 // delete image ********************
 const deleteImage = (id) => {
   const settings = {
@@ -121,7 +93,7 @@ document.querySelector('#reset-button').addEventListener('click', () => {
 });
 
 const categoryButtons = (items) => {
-  items = removeDuplicates(items, 'category');
+  items = removeDuplicates(items, 'Title');
   console.log(items);
   document.querySelector('#categories').innerHTML = '';
   for (let item of items) {
@@ -180,6 +152,84 @@ const getData = () => {
   });
 
 };
+
+const registerForm = document.getElementById('register-form');
+const loginForm = document.getElementById('login-form');
+
+//Form visibility ****************************'
+const openRegisterForm = () => {
+
+  if (loginForm.style.display === 'block') {
+    loginForm.style.display = 'none';
+    document.getElementById('register-form').style.display = 'block';
+  } else {
+    document.getElementById('register-form').style.display = 'block';
+  }
+};
+
+const closeRegisterForm = () => {
+  document.getElementById('register-form').style.display = 'none';
+};
+
+const openLoginForm = () => {
+  if (registerForm.style.display === 'block') {
+    registerForm.style.display = 'none';
+    document.getElementById('login-form').style.display = 'block';
+  } else {
+    document.getElementById('login-form').style.display = 'block';
+  }
+};
+
+const closeLoginForm = () => {
+  document.getElementById('login-form').style.display = 'none';
+};
+//**********************************
+
+//User Registration ***********************
+const register = (evt) => {
+
+  let password = document.getElementById('password').value;
+  let confirm_password = document.getElementById('confpwd').value;
+  const validPasswordString = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+  const errors = [];
+
+  if (password !== confirm_password) {
+    errors.push('Passwords dont match');
+  }
+
+  if (password.match(validPasswordString)) {
+  } else {
+    errors.push(
+        'password must be at least 6 characters and must contain 1 capital & 1 number');
+  }
+  if (errors.length > 0) {
+    evt.preventDefault();
+    alert(errors);
+    errors.length = 0;
+  } else {
+
+    const data = JSON.stringify({
+      Username: registerForm.querySelector('input[name="username"]').value,
+      Email: registerForm.querySelector('input[name="email"]').value,
+      Password: registerForm.querySelector('input[name="password"]').value,
+    });
+    const settings = {
+      method: 'POST',
+      body: data,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    };
+    fetch('./register', settings).then((response) => {
+      return response.json();
+    }).then((json) => {
+      console.log(json);
+    });
+  };
+};
+
+registerForm.addEventListener('submit', register);
+// **************************
 
 const updateView = (items) => {
   categoryButtons(items);
@@ -245,3 +295,39 @@ const resetMap = (item) => {
 
 // 1. Start map:
 initMap();
+
+
+//User Login ************************
+const login = (evt) => {
+  evt.preventDefault();
+  const data = JSON.stringify({
+    username: loginForm.querySelector('input[name="username"]').value,
+    password: loginForm.querySelector('input[name="password"]').value,
+  });
+  console.log(data);
+  const settings = {
+    method: 'POST',
+    body: data,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+  };
+  fetch('./login', settings).then((response) => {
+    return response.json();
+  }).then((json) => {
+    console.log(json);
+    showHide(json);
+  });
+};
+loginForm.addEventListener('submit', login);
+// ***************************
+
+//Show Elements when user logs in *******************
+const showHide = (user) => {
+  //show and hide elements when user logs in
+  document.getElementById('SignUp').style.display = 'none';
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('login-form').style.display = 'none';
+};
+
+
